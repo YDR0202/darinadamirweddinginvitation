@@ -9,12 +9,12 @@
 #place{
   position: relative;
   height: 900px;
-
+  background-image: url("zags.jpg"); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-   /* параллакс */
+  background-attachment: fixed;/* параллакс */
 
   display: flex;
   justify-content: center;
@@ -414,8 +414,7 @@ h1{
 </div>
 
 <div class="section" style="background:#fff;">
-<section id="place">
-<div class="place-bg"></div>  
+<section id="place"> 
 <div class="place content">
 <h2 class="fade-in">📍 Место и время</h2>
 <p class="fade-in">г. Тюмень</p>
@@ -635,27 +634,12 @@ function openInvite(){
   },1000);
 }
 </script>
-
-<script>
-
-const section = document.querySelector("#place");
-const bg = document.querySelector(".place-bg");
-
-window.addEventListener("scroll", () => {
-
-  const rect = section.getBoundingClientRect();
-  const speed = rect.top * 0.15;
-
-  bg.style.transform = `translateY(${speed}px)`;
-
-});
-
-</script>
   
 </body>
 <div id="hearts-container"></div>
 
 </html>
+
 
 
 
