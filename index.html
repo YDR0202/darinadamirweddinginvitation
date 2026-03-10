@@ -336,6 +336,29 @@ h1{
   position: relative;
   z-index: 10;
 }
+  @media (max-width:768px){
+  #intro{
+    padding: 20px;          /* немного отступов */
+    height: 100vh;          /* не больше высоты экрана */
+    flex-direction: column;  /* текст и кнопка будут в колонку */
+    justify-content: center; /* по вертикали центрируем, но с padding сверху/снизу */
+  }
+
+  #intro h1{
+    font-size:28px;         /* уменьшаем заголовок */
+    margin-bottom:10px;
+  }
+
+  #intro p{
+    font-size:16px;         /* уменьшаем текст */
+    margin-bottom:20px;
+  }
+
+  #intro button{
+    font-size:16px;         /* уменьшаем кнопку */
+    padding:12px 25px;
+  }
+}
 </style>
 
 
@@ -589,4 +612,5 @@ function openInvite(){
 
 </body>
 <div id="hearts-container"></div>
+
 </html>
