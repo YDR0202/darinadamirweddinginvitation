@@ -78,7 +78,8 @@
 
 #dresscode{
   position: relative;
-  height: 900px;
+  width: 100%;
+  min-height: 900px;
 
   background-image: url("10.jpg");
   background-size: contain;
@@ -369,6 +370,22 @@ h1{
 }
 
 }
+
+  @media (max-width:768px){
+
+#dresscode{
+  min-height: 650px;
+}
+
+#dresscode h2{
+  font-size:42px;
+}
+
+#dresscode p{
+  font-size:20px;
+}
+
+}
 </style>
 
 
@@ -624,6 +641,7 @@ function openInvite(){
 <div id="hearts-container"></div>
 
 </html>
+
 
 
 
