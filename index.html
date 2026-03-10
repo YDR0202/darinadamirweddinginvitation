@@ -51,9 +51,20 @@
 }
 
 /* текст поверх */
-
+.place-bg{
+  position:absolute;
+  inset:-200px 0 -200px 0;
+  background-image:url("zags.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  z-index:0;
+  transform:translateY(0);
+}
+  
 .place-content{
   position: relative;
+  z-index:2;
   color:white;
   text-align:center;
   font-family:'Playfair Display', serif;
@@ -401,6 +412,7 @@ h1{
 
 <div class="section" style="background:#fff;">
 <section id="place">
+<div class="place-bg"></div>  
 <div class="place content">
 <h2 class="fade-in">📍 Место и время</h2>
 <p class="fade-in">г. Тюмень</p>
@@ -623,13 +635,13 @@ function openInvite(){
 
 <script>
 
-const place = document.querySelector("#place");
+const bg = document.querySelector(".place-bg");
 
 window.addEventListener("scroll", () => {
 
-  const offset = window.pageYOffset;
+  const scroll = window.scrollY;
 
-  place.style.backgroundPositionY = offset * 0.4 + "px";
+  bg.style.transform = "translateY(" + scroll * 0.35 + "px)";
 
 });
 
@@ -639,6 +651,7 @@ window.addEventListener("scroll", () => {
 <div id="hearts-container"></div>
 
 </html>
+
 
 
 
