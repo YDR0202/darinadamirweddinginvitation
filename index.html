@@ -10,7 +10,6 @@
   position: relative;
   height: 900px;
 
-  background-image: url("zags.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -53,7 +52,7 @@
 /* текст поверх */
 .place-bg{
   position:absolute;
-  inset:-200px 0 -200px 0;
+  inset:-300px 0 -300px 0;
   background-image:url("zags.jpg");
   background-size:cover;
   background-position:center;
@@ -641,7 +640,7 @@ window.addEventListener("scroll", () => {
 
   const scroll = window.scrollY;
 
-  bg.style.transform = "translateY(" + scroll * 0.35 + "px)";
+  bg.style.transform = "translateY(" + scroll * 0.15 + "px)";
 
 });
 
@@ -651,6 +650,7 @@ window.addEventListener("scroll", () => {
 <div id="hearts-container"></div>
 
 </html>
+
 
 
 
