@@ -52,6 +52,10 @@
 /* текст поверх */
 .place-bg{
   position:absolute;
+  top:-150px;
+  left:0;
+  width:100%;
+  height:120%;
   inset:-300px 0 -300px 0;
   background-image:url("zags.jpg");
   background-size:cover;
@@ -634,13 +638,15 @@ function openInvite(){
 
 <script>
 
+const section = document.querySelector("#place");
 const bg = document.querySelector(".place-bg");
 
 window.addEventListener("scroll", () => {
 
-  const scroll = window.scrollY;
+  const rect = section.getBoundingClientRect();
+  const offset = rect.top * -0.2;
 
-  bg.style.transform = "translateY(" + scroll * 0.15 + "px)";
+  bg.style.transform = "translateY(" + offset + "px)";
 
 });
 
@@ -650,6 +656,7 @@ window.addEventListener("scroll", () => {
 <div id="hearts-container"></div>
 
 </html>
+
 
 
 
