@@ -15,7 +15,7 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  background-attachment: fixed; /* параллакс */
+   /* параллакс */
 
   display: flex;
   justify-content: center;
@@ -621,9 +621,24 @@ function openInvite(){
 }
 </script>
 
+<script>
+
+const place = document.querySelector("#place");
+
+window.addEventListener("scroll", () => {
+
+  const offset = window.pageYOffset;
+
+  place.style.backgroundPositionY = offset * 0.4 + "px";
+
+});
+
+</script>
+  
 </body>
 <div id="hearts-container"></div>
 
 </html>
+
 
 
