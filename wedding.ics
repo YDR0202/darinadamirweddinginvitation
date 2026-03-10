@@ -1,5 +1,6 @@
 BEGIN:VCALENDAR
 VERSION:2.0
+CALSCALE:GEORGIAN
 PRODID:-//Свадебный сайт//RU
 BEGIN:VEVENT
 UID:20260707T120000@weddingsite.com
@@ -10,4 +11,5 @@ SUMMARY:Свадьба Дарина & Дамир
 DESCRIPTION:Свадьба Дарина и Дамира.\nМесто: ул. Малыгина 85, Дворец Бракосочетания, Янтарный зал
 LOCATION:ул. Малыгина 85, Тюмень, Россия
 END:VEVENT
+
 END:VCALENDAR
