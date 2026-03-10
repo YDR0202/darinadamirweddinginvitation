@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+#place{
+  position: relative;
+  height: 900px;
+
+  background-image: url("zags.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-attachment: fixed; /* параллакс */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+/* затемнение + blur */
+
+#place::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+}
+
+#place h2{
+  font-size:56px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+  color:white;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+
+#place p{
+  font-size:26px;
+  margin:8px 0;
+  color:white;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.8);
+}
+
+/* текст поверх */
+
+.place-content{
+  position: relative;
+  color:white;
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  max-width:900px;
+  padding:20px;
+}
+
+/* начальное состояние текста */
+
+.fade-in{
+  opacity:0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+/* когда текст появляется */
+
+.fade-in.visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
+
+#dresscode{
+  position: relative;
+  height: 900px;
+
+  background-image: url("10.jpg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  padding-top: 50px;
+  overflow: hidden;
+}
+
+#dresscode h2{
+  font-size:56px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+  color:#3b010b;
+  
+}
+
+#dresscode p{
+  font-size:26px;
+  margin:8px 0;
+  color:#3b010b;
+  
+}
+
+/* текст поверх */
+
+.place-content{
+  position: relative;
+  color:white;
+  text-align:center;
+  font-family:'Playfair Display', serif;
+  max-width:900px;
+  padding:20px;
+}
+
+/* начальное состояние текста */
+
+.fade-in{
+  opacity:0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+/* когда текст появляется */
+
+.fade-in.visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
+#dresscode h2{
+  font-size:56px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+  
+}
+
+#dresscode p{
+  font-size:26px;
+  
+}
+
+#hearts-container{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:999;
+}
+
+.heart{
+  position:absolute;
+  color:#ff6b81;
+  font-size:20px;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  0%{
+    transform:translateY(-10vh) rotate(0deg);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+</style>
+
+<style>
+.rsvp-button{
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  padding: 16px 34px;
+  border-radius: 40px;
+  border: none;
+
+  color: white;
+  background: linear-gradient(135deg,#ff7a7a,#ff4f81);
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+  transition: all 0.25s ease;
+}
+
+.rsvp-button:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+.rsvp-button:active{
+  transform: translateY(1px);
+}
+
+</style>
+
+<meta charset="UTF-8">
+<title>Приглашение на свадьбу</title>
+<style>
+body{
+    margin:0;
+    font-family: 'Georgia', serif;
+    background:#f7f5f2;
+    color:#333;
+    text-align:center;
+}
+
+.header{
+    background:url("photo.jpg") center/cover no-repeat;
+    height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    color:white;
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
+}
+
+h1{
+    font-size:60px;
+    margin:0;
+}
+
+.date{
+    font-size:28px;
+    margin-top:10px;
+}
+
+.section{
+    padding:60px 20px;
+}
+
+.box{
+    max-width:700px;
+    margin:auto;
+    font-size:20px;
+    line-height:1.6;
+}
+
+.timer{
+    font-size:36px;
+    margin-top:20px;
+}
+
+.footer{
+    padding:40px;
+    background:#eee;
+}
+
+@media (max-width:768px){
+
+h1{
+  font-size:40px;
+}
+
+#place h2,
+#dresscode h2{
+  font-size:36px;
+}
+
+#place p,
+#dresscode p{
+  font-size:18px;
+}
+
+.timer{
+  font-size:24px;
+}
+
+#place,
+#dresscode{
+  height:700px;
+}
+
+}
+
+
+#intro{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#3b010b 0%, #5a0f18 50%, #2a0007 100%);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:9999;
+  transition:opacity 1s ease;
+}
+
+#intro h1{
+  font-size:48px;
+  color:white;
+  margin-bottom:20px;
+}
+
+#intro p{
+  color:#ddd;
+  font-size:22px;
+  margin-bottom:40px;
+}
+
+#intro button{
+  font-size:20px;
+  padding:16px 40px;
+  border:none;
+  border-radius:40px;
+  background:white;
+  cursor:pointer;
+}
+
+.calendar-btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 30px;
+  background:#111;
+  color:white;
+  text-decoration:none;
+  border-radius:30px;
+  font-size:18px;
+
+  position: relative;
+  z-index: 10;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<div id="intro">
+  <div class="intro-content">
+    <h1>Приглашение на торжественную церемонию бракосочетания</h1>
+    <button onclick="openInvite()">Открыть приглашение</button>
+  </div>
+</div>
+
+<div class="header">
+<h1>Дарина & Дамир</h1>
+<div class="date">07.07.2026</div>
+</div>
+
+<div class="section">
+<div class="box">
+<h2>Дорогие гости!</h2>
+<p>
+Мы будем счастливы разделить с вами один из самых важных дней нашей жизни.
+Приглашаем вас на торжественную церемонию бракосочетания.
+</p>
+</div>
+</div>
+
+<div class="section" style="background:#fff;">
+<section id="place">
+<div class="place content">
+<h2 class="fade-in">📍 Место и время</h2>
+<p class="fade-in">г. Тюмень</p>
+<p class="fade-in">ул. Малыгина 85</p>
+<p class="fade-in">Дворец Бракосочетания</p>
+<p class="fade-in">Янтарный Зал</p>
+<p class="fade-in">07.07.2026 в 12:00</p>
+
+<a class="calendar-btn" href="wedding.ics" download="Свадьба Дарина и Дамир.ics">
+  Добавить в календарь
+</a>
+</div>
+</section>
+</div>
+
+<div class="section">
+<div class="box">
+<h2>⏳ До свадьбы осталось</h2>
+<div class="timer" id="timer"></div>
+</div>
+</div>
+
+<section id="dresscode">
+
+  <!-- фоновые картинки -->
+  <div class="dresscode-bg" style="background-image:url('10.jpg')"></div>
+
+  <!-- текст -->
+  <div class="dresscode-content">
+    <h2 class="fade-in">📌 Дресс-код</h2>
+    <p class="fade-in">Просим придерживаться палитры</p>
+  </div>
+
+</section>
+
+<div class="section" style="background:#fff;">
+<div class="box">
+<h2>Будем рады видеть вас!</h2>
+<button class="rsvp-button" onclick="openRSVP()">
+Подтвердить присутствие
+</button>
+
+<div id="rsvpModal" style="display:none; position:fixed; top:0; left:0; 
+width:100%; height:100%; background:rgba(0,0,0,0.5); 
+justify-content:center; align-items:center;">
+
+  <div style="background:white; padding:20px; border-radius:10px;">
+    <h3>Подтвердите присутствие</h3>
+    <input id="name" type="text" placeholder="Ваше имя">
+    <br><br>
+    <button onclick="sendRSVP()">Отправить</button>
+    <button onclick="closeRSVP()">Закрыть</button>
+  </div>
+
+</div>
+
+<script>
+function openRSVP(){
+  document.getElementById("rsvpModal").style.display="flex";
+}
+
+function closeRSVP(){
+  document.getElementById("rsvpModal").style.display="none";
+}
+</script>
+<p>
+Контактный телефон<br>
++7 906 827 30 31<br>
++7 705 441 20 66
+</p>
+</div>
+</div>
+
+<div class="footer">
+С любовью ❤️
+</div>
+
+<script>
+const weddingDate = new Date("July 7, 2026 12:00:00").getTime();
+
+const timer = setInterval(function(){
+
+const now = new Date().getTime();
+const distance = weddingDate - now;
+
+const days = Math.floor(distance / (1000*60*60*24));
+const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+
+document.getElementById("timer").innerHTML =
+days + " дней " + hours + " часов " + minutes + " минут";
+
+},1000);
+</script>
+
+<script>
+async function sendRSVP(){
+
+  const name = document.getElementById("name").value;
+
+  const token = "8728724558:AAH-S3kbcaUWKWiyp3ZGFcl4pUMPC8q-V6s";
+  const chat_id = "5675443040";
+
+  const text = "Новое подтверждение RSVP: " + name;
+
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      chat_id: chat_id,
+      text: text
+    })
+  });
+  showConfetti(); 
+  alert("Спасибо! Ваше присутствие подтверждено.");
+  closeRSVP();
+}
+</script>
+
+<script>
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("visible");
+    }
+  });
+});
+
+document.querySelectorAll(".fade-in").forEach(el=>{
+  observer.observe(el);
+});
+
+</script>
+
+<script>
+
+  // Появление текста при прокрутке
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+      }
+    });
+  });
+
+  document.querySelectorAll("#dresscode .fade-in").forEach(el=>{
+    observer.observe(el);
+  });
+
+});
+</script>
+
+<script>
+function showConfetti(){
+
+  const duration = 1500;
+  const end = Date.now() + duration;
+
+  (function frame() {
+
+    confetti({
+      particleCount: 4,
+      angle: 60,
+      spread: 70,
+      origin: { x: 0 }
+    });
+
+    confetti({
+      particleCount: 4,
+      angle: 120,
+      spread: 70,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+
+  })();
+}
+</script>
+
+<script>
+
+function createHeart(){
+
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.animationDuration = (4 + Math.random()*3) + "s";
+  heart.style.fontSize = (16 + Math.random()*20) + "px";
+
+  document.getElementById("hearts-container").appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },7000);
+
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+<script>
+function openInvite(){
+  const intro = document.getElementById("intro");
+  intro.style.opacity = "0";
+
+  setTimeout(()=>{
+    intro.style.display = "none";
+  },1000);
+}
+</script>
+
+</body>
+<div id="hearts-container"></div>
+</html>
